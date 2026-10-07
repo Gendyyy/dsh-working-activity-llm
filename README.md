@@ -93,9 +93,9 @@ From a local checkout, add the standalone package directory:
 dsh plugin --profile <profile> add /path/to/dsh-working-activity-llm
 ```
 
-For the `desktop` profile, use the Electron app's Plugin Manager; that profile cannot be changed by the CLI.
+For the `desktop` profile, use the Electron app's Plugin Manager; that profile cannot be changed by the CLI. In the app, open **Plugins → Add plugin**, enter `https://github.com/Gendyyy/dsh-working-activity-llm.git`, accept the trust prompt, and install. Then enable the new bundle (and its `working-activity` row if shown). After the restart noted below, use **Configure** on that row to choose a model.
 
-The package is a **self-mounting bundle**: it declares `dsh.bundle.patch` (`cordis.patch.yml`), so the CLI both installs it and appends it to the profile's `dsh.profile.bundles`. At boot the bundle patch inserts its own `working-activity` row — no manual mount. It ships both halves: the node plugin and the browser bundle (`lib/client.js`), which the web client auto-mounts into `conversation.input.dock`. No official source patch, no runtime patch.
+The repository's `prepare` script builds the host and browser outputs when installed from Git, so the package does not need checked-in build artifacts. The package is a **self-mounting bundle**: it declares `dsh.bundle.patch` (`cordis.patch.yml`), so the manager installs it and adds it to the profile's bundle set. At boot the bundle patch inserts its own `working-activity` row — no manual mount. It ships both halves: the node plugin and the browser bundle (`lib/client.js`), which the web client auto-mounts into `conversation.input.dock`. No official source patch, no runtime patch.
 
 **Restart DSH after installing** — a new cordis row is not hot-mounted. Then rebuild the browser half after any `src/client/` change:
 

@@ -54,6 +54,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.client.json",
     "build:client": "tsdown -c tsdown.config.ts",
+    "prepare": "npm run build && npm run build:client",
     "test": "vitest run",
     "verify:host-contract": "node scripts/verify-host-contract.mjs",
     "verify:client-bundle": "npm run build:client && node scripts/verify-client-bundle.mjs",
