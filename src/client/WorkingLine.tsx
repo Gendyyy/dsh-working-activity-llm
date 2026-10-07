@@ -129,18 +129,22 @@ export function WorkingLine({ useProjection, sessionId }: WorkingLineProps) {
   return (
     <div className={css.line} data-activity-phase={activity.phase}>
       <span className={css.marker} aria-hidden="true">
-        <svg className={css.spinnerIcon} viewBox="0 0 24 24" focusable="false">
-          <g className={css.spinnerSpin}>
-            <path className={css.spinnerRay} d="M12 2.5V6" />
-            <path className={css.spinnerRay} d="m18.72 5.28-2.65 2.65" />
-            <path className={css.spinnerRay} d="M21.5 12H18" />
-            <path className={css.spinnerRay} d="m18.72 18.72-2.65-2.65" />
-            <path className={css.spinnerRay} d="M12 21.5V18" />
-            <path className={css.spinnerRay} d="m5.28 18.72 2.65-2.65" />
-            <path className={css.spinnerRay} d="M2.5 12H6" />
-            <path className={css.spinnerRay} d="m5.28 5.28 2.65 2.65" />
-          </g>
-        </svg>
+        <span className={css.spinnerIcon}>
+          <span className={css.spinnerTrack}>
+            <span className={css.spinnerFrame}>·</span>
+            <span className={css.spinnerFrame}>✢</span>
+            <span className={css.spinnerFrame}>✳</span>
+            <span className={css.spinnerFrame}>✶</span>
+            <span className={css.spinnerFrame}>✻</span>
+            <span className={css.spinnerFrame}>✽</span>
+            <span className={css.spinnerFrame}>✽</span>
+            <span className={css.spinnerFrame}>✻</span>
+            <span className={css.spinnerFrame}>✶</span>
+            <span className={css.spinnerFrame}>✳</span>
+            <span className={css.spinnerFrame}>✢</span>
+            <span className={css.spinnerFrame}>·</span>
+          </span>
+        </span>
       </span>
       <span
         className={css.text}
