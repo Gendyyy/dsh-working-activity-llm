@@ -1,4 +1,4 @@
-/* Working line row: one dim line with an animated DeepSeek-blue whale and
+/* Working line row: one dim line with a Claude-style thinking spinner and
    the turn's tool-count badge, sized to the composer dock inset like the
    queue strip. Mirrors the pre-slots patch's WorkingLine visuals, re-targeted
    at the rc.6 design tokens. */
@@ -27,57 +27,49 @@
   height: 18px;
 }
 
-.whaleIcon {
+.spinnerIcon {
   display: block;
-  width: 22px;
+  width: 18px;
   height: 18px;
   overflow: visible;
+  color: #d97757;
 }
 
-.whaleSwim {
+.spinnerSpin {
   transform-box: fill-box;
   transform-origin: center;
-  animation: whale-swim 2.2s ease-in-out infinite;
+  animation: claude-spin 1.2s steps(8, end) infinite;
 }
 
-.whaleBody,
-.whaleTail,
-.whaleFin {
-  fill: #4d6bfe;
+.spinnerRay {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.1px;
+  stroke-linecap: round;
 }
 
-.whaleEye {
-  fill: #fff;
+/* A fading tail makes rotation visible instead of a static symmetric star. */
+.spinnerRay:nth-child(1) { opacity: 0.22; }
+.spinnerRay:nth-child(2) { opacity: 0.34; }
+.spinnerRay:nth-child(3) { opacity: 0.46; }
+.spinnerRay:nth-child(4) { opacity: 0.58; }
+.spinnerRay:nth-child(5) { opacity: 0.7; }
+.spinnerRay:nth-child(6) { opacity: 0.82; }
+.spinnerRay:nth-child(7) { opacity: 0.92; }
+.spinnerRay:nth-child(8) { opacity: 1; }
+
+/* Claude Code-style spinner speeds up while a tool is running. */
+.line[data-activity-phase='tool'] .spinnerSpin {
+  animation-duration: 0.72s;
 }
 
-.bubble {
-  fill: #4d6bfe;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: whale-bubble 1.8s ease-out infinite;
+.line[data-activity-phase='waiting'] .spinnerSpin {
+  animation-duration: 1.8s;
 }
 
-.bubbleTwo {
-  animation-delay: 0.9s;
-}
-
-/* The whale swims a little faster when a tool is running. */
-.line[data-activity-phase='tool'] .whaleSwim {
-  animation-duration: 1.4s;
-}
-
-.line[data-activity-phase='waiting'] .whaleSwim {
-  animation-duration: 3s;
-}
-
-/* A completed turn settles into a still whale. */
-.line[data-activity-phase='done'] .whaleSwim,
-.line[data-activity-phase='done'] .bubble {
+/* A completed turn settles into a still sparkle. */
+.line[data-activity-phase='done'] .spinnerSpin {
   animation: none;
-}
-
-.line[data-activity-phase='done'] .bubble {
-  opacity: 0.45;
 }
 
 .text {
@@ -98,10 +90,10 @@
   font-weight: 500;
 }
 
-/* While a summary is shown the whale gets a soft brand glow: the agent's
+/* While a summary is shown the spinner gets a soft warm glow: the agent's
    intent is known, the work is in flight. */
-.line[data-activity-semantic='1'] .whaleIcon {
-  filter: drop-shadow(0 0 3px color-mix(in srgb, #4d6bfe 45%, transparent));
+.line[data-activity-semantic='1'] .spinnerIcon {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, #d97757 45%, transparent));
 }
 
 .tools {
@@ -116,36 +108,14 @@
   text-align: center;
 }
 
-@keyframes whale-swim {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-1deg);
-  }
-
-  50% {
-    transform: translateY(-1px) rotate(1.5deg);
-  }
-}
-
-@keyframes whale-bubble {
-  0% {
-    opacity: 0;
-    transform: translateY(2px) scale(0.7);
-  }
-
-  25% {
-    opacity: 0.95;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-6px) scale(1.1);
+@keyframes claude-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .whaleSwim,
-  .bubble {
+  .spinnerSpin {
     animation: none;
   }
 }

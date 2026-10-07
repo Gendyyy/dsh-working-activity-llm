@@ -97,17 +97,19 @@ afterEach(() => {
 })
 
 describe('dock row paint loop', () => {
-  it('renders a decorative whale SVG instead of a dot indicator', () => {
+  it('renders a Claude-style thinking spinner instead of the whale icon', () => {
     const tree = (WorkingLine as unknown as (props: unknown) => { props: { children: unknown[] } })({
       useProjection: () => liveView(),
       sessionId: undefined,
     })
     const marker = tree.props.children[0] as { type: unknown; props: { children: unknown } }
-    const whale = marker.props.children as { type: unknown; props: { viewBox?: string } }
+    const spinner = marker.props.children as { type: unknown; props: { viewBox?: string; children?: unknown[] } }
+    const rayGroup = spinner.props.children as { props?: { children?: unknown[] } }
 
     expect(marker.type).toBe('span')
-    expect(whale.type).toBe('svg')
-    expect(whale.props.viewBox).toBe('0 0 32 24')
+    expect(spinner.type).toBe('svg')
+    expect(spinner.props.viewBox).toBe('0 0 24 24')
+    expect(rayGroup.props?.children).toHaveLength(8)
   })
 
   it('paints the heuristic line before any summary exists', async () => {

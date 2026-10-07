@@ -129,14 +129,16 @@ export function WorkingLine({ useProjection, sessionId }: WorkingLineProps) {
   return (
     <div className={css.line} data-activity-phase={activity.phase}>
       <span className={css.marker} aria-hidden="true">
-        <svg className={css.whaleIcon} viewBox="0 0 32 24" focusable="false">
-          <circle className={`${css.bubble} ${css.bubbleOne}`} cx="20" cy="4.8" r="1.15" />
-          <circle className={`${css.bubble} ${css.bubbleTwo}`} cx="23" cy="3.4" r="0.72" />
-          <g className={css.whaleSwim}>
-            <path className={css.whaleTail} d="M7.5 12.8c-2.6-.2-4.8-1.6-6-3.8-.2 2.8.7 4.8 2.9 6.1-1.1 1.6-1.5 3.2-1.2 5.1 2.6-1.1 4.8-2.8 6.4-5.4" />
-            <path className={css.whaleBody} d="M7.1 13.8C9.1 8.6 14.6 5.7 20.3 6.6c4.5.7 7.4 3.5 8.2 7.3 1.1.4 1.8 1.2 1.8 2s-.9 1.7-2.4 2c-1.6 2.3-4.8 3.6-8.6 3.6-5.4 0-10.4-2.8-12.2-7.7Z" />
-            <path className={css.whaleFin} d="M15.8 19c.9 1.7 2.7 2.7 5 2.8-1.1-1.6-2.2-2.7-4.2-3.4Z" />
-            <circle className={css.whaleEye} cx="26" cy="13.5" r="0.48" />
+        <svg className={css.spinnerIcon} viewBox="0 0 24 24" focusable="false">
+          <g className={css.spinnerSpin}>
+            <path className={css.spinnerRay} d="M12 2.5V6" />
+            <path className={css.spinnerRay} d="m18.72 5.28-2.65 2.65" />
+            <path className={css.spinnerRay} d="M21.5 12H18" />
+            <path className={css.spinnerRay} d="m18.72 18.72-2.65-2.65" />
+            <path className={css.spinnerRay} d="M12 21.5V18" />
+            <path className={css.spinnerRay} d="m5.28 18.72 2.65-2.65" />
+            <path className={css.spinnerRay} d="M2.5 12H6" />
+            <path className={css.spinnerRay} d="m5.28 5.28 2.65 2.65" />
           </g>
         </svg>
       </span>
