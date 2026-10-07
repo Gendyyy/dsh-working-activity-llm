@@ -1,0 +1,84 @@
+/* Working-activity configuration card on the Plugins page: a short list of
+   labelled controls, sized like the other row pages (the sidebar detail panel
+   is narrow) and using the same design tokens as the dock row. */
+
+.page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 420px;
+  padding: 4px 0 8px;
+  font-family: var(--dsw-font-family);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.summary {
+  margin: 0;
+  font-family: var(--dsw-font-family);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.description {
+  margin: 0;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.notice {
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--dsw-alias-bg-secondary, rgb(127 127 127 / 8%));
+  color: var(--dsw-alias-label-tertiary, inherit);
+}
+
+.row {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--dsw-alias-label-primary, inherit);
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid var(--dsw-alias-border-secondary, rgb(127 127 127 / 30%));
+  border-radius: 6px;
+  background: var(--dsw-alias-bg-primary, transparent);
+  color: var(--dsw-alias-label-primary, inherit);
+  font: inherit;
+}
+
+.input:disabled {
+  opacity: 0.6;
+}
+
+.hint {
+  margin: 0;
+  color: var(--dsw-alias-label-tertiary, inherit);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.reset {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--dsw-alias-brand-primary, inherit);
+  font: inherit;
+  cursor: pointer;
+}
+
+.reset:hover {
+  text-decoration: underline;
+}

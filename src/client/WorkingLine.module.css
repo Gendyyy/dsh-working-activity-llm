@@ -1,0 +1,151 @@
+/* Working line row: one dim line with an animated DeepSeek-blue whale and
+   the turn's tool-count badge, sized to the composer dock inset like the
+   queue strip. Mirrors the pre-slots patch's WorkingLine visuals, re-targeted
+   at the rc.6 design tokens. */
+
+.line {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: var(--dsh-composer-card-max-width);
+  margin: 0 auto;
+  padding: 4px 16px 0;
+  font-family: var(--dsw-font-family);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.marker {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 18px;
+}
+
+.whaleIcon {
+  display: block;
+  width: 22px;
+  height: 18px;
+  overflow: visible;
+}
+
+.whaleSwim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: whale-swim 2.2s ease-in-out infinite;
+}
+
+.whaleBody,
+.whaleTail,
+.whaleFin {
+  fill: #4d6bfe;
+}
+
+.whaleEye {
+  fill: #fff;
+}
+
+.bubble {
+  fill: #4d6bfe;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: whale-bubble 1.8s ease-out infinite;
+}
+
+.bubbleTwo {
+  animation-delay: 0.9s;
+}
+
+/* The whale swims a little faster when a tool is running. */
+.line[data-activity-phase='tool'] .whaleSwim {
+  animation-duration: 1.4s;
+}
+
+.line[data-activity-phase='waiting'] .whaleSwim {
+  animation-duration: 3s;
+}
+
+/* A completed turn settles into a still whale. */
+.line[data-activity-phase='done'] .whaleSwim,
+.line[data-activity-phase='done'] .bubble {
+  animation: none;
+}
+
+.line[data-activity-phase='done'] .bubble {
+  opacity: 0.45;
+}
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The semantic summary is the chip: slightly brighter than the tool line so the
+   eye lands on "what the agent is doing" before "which command is running".
+   The host paints the attribute imperatively (see WorkingLine.tsx); React owns
+   data-activity-phase and never touches this one. */
+.line[data-activity-semantic='1'] {
+  color: var(--dsw-alias-label-primary);
+}
+
+.line[data-activity-semantic='1'] .text {
+  font-weight: 500;
+}
+
+/* While a summary is shown the whale gets a soft brand glow: the agent's
+   intent is known, the work is in flight. */
+.line[data-activity-semantic='1'] .whaleIcon {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, #4d6bfe 45%, transparent));
+}
+
+.tools {
+  flex: none;
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--dsw-alias-surface-tertiary);
+  color: var(--dsw-alias-label-secondary);
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+}
+
+@keyframes whale-swim {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-1px) rotate(1.5deg);
+  }
+}
+
+@keyframes whale-bubble {
+  0% {
+    opacity: 0;
+    transform: translateY(2px) scale(0.7);
+  }
+
+  25% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-6px) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whaleSwim,
+  .bubble {
+    animation: none;
+  }
+}

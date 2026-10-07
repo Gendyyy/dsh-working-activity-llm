@@ -1,0 +1,9 @@
+allowBuilds:
+  esbuild: true
+
+# pnpm 11 no longer reads package.json's "pnpm" field, so settings live here.
+#
+# This fork targets ONE host line — the DSH 0.2.0-rc.2 desktop/runtime cohort —
+# so the old two-corridor overrides (rc.6 baseline + 0.1.7 client cohort) are
+# gone along with the corridors they pinned, and every @deepseek-ai/dsh-* dev
+# dependency is pinned exactly to 0.2.0-rc.2.
