@@ -38,9 +38,6 @@ import css from './WorkingLine.module.css'
 /** Full props of the dock entry: the input-zone runtime share (session standard kit). */
 export type WorkingLineProps = PropsRuntime<'conversation.input.dock'>
 
-/** Tool-count badge copy (no locale seat: the line text itself is host-composed). */
-const TOOLS_LABEL = 'tools this turn'
-
 /** Row attribute the ticker flips while a semantic summary is on screen. */
 const SEMANTIC_ATTR = 'data-activity-semantic'
 
@@ -152,11 +149,6 @@ export function WorkingLine({ useProjection, sessionId }: WorkingLineProps) {
       >
         {activity.line}
       </span>
-      {activity.phase === 'done' && activity.toolCount > 0 && (
-        <span className={css.tools} title={`${activity.toolCount} ${TOOLS_LABEL}`}>
-          {activity.toolCount}
-        </span>
-      )}
     </div>
   )
 }

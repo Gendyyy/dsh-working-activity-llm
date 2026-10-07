@@ -108,17 +108,6 @@
   filter: drop-shadow(0 0 3px color-mix(in srgb, #d97757 45%, transparent));
 }
 
-.tools {
-  flex: none;
-  min-width: 18px;
-  padding: 0 5px;
-  border-radius: 9px;
-  background: var(--dsw-alias-surface-tertiary);
-  color: var(--dsw-alias-label-secondary);
-  font-size: 11px;
-  line-height: 18px;
-  text-align: center;
-}
 
 @keyframes claude-glyph-cycle {
   to {

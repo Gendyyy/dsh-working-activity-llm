@@ -235,18 +235,14 @@ assert.equal(element.type, 'div', 'the row must stay a single div')
 assert.equal(element.props['data-activity-phase'], 'tool', 'the phase must drive the CSS hook')
 assert.equal(typeof element.props.className, 'string', 'the row must carry its CSS-module class')
 const children = element.props.children
-assert.ok(Array.isArray(children), 'the row must render its marker, text, and optional badge as children')
+assert.ok(Array.isArray(children), 'the row must render only its marker and text')
+assert.equal(children.length, 2, 'the chip must not repeat the tool-count summary')
 assert.equal(children[0]?.type, 'span', 'the first child must be the phase marker')
 assert.equal(children[0]?.props['aria-hidden'], 'true', 'the marker must stay hidden from assistive tech')
 assert.equal(children[1]?.props.children, live.line, "the second child must render the host's line verbatim")
-assert.equal(children[2], false, 'a tool count must stay hidden while the turn is active')
 
 const done = readWith({ ...live, phase: 'done', live: false })
-assert.equal(done.props.children[2]?.props.children, 2, 'a positive tool count must render after the turn ends')
-assert.equal(done.props.children[2]?.props.title, '2 tools this turn', 'the badge must keep its tooltip copy')
-
-const quiet = readWith({ ...live, phase: 'done', toolCount: 0 })
-assert.equal(quiet.props.children[2], false, 'a zero tool count must not render the badge')
+assert.equal(done.props.children.length, 2, 'the chip must remain free of a tool-count badge after completion')
 
 console.log(
   `verify-client-bundle: OK (${BUNDLE_ID} registers ${SLOT_KEY}#${entry.options.id} order ${entry.options.order}; `
