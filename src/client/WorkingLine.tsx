@@ -152,7 +152,7 @@ export function WorkingLine({ useProjection, sessionId }: WorkingLineProps) {
       >
         {activity.line}
       </span>
-      {activity.toolCount > 0 && (
+      {activity.phase === 'done' && activity.toolCount > 0 && (
         <span className={css.tools} title={`${activity.toolCount} ${TOOLS_LABEL}`}>
           {activity.toolCount}
         </span>

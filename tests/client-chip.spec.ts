@@ -113,6 +113,23 @@ describe('dock row paint loop', () => {
     ])
   })
 
+  it('shows the tool count only after the turn finishes', () => {
+    const render = (view: unknown) =>
+      (WorkingLine as unknown as (props: unknown) => { props: { children: unknown[] } })({
+        useProjection: () => view,
+        sessionId: undefined,
+      })
+
+    const active = render(liveView({ toolCount: 3 }))
+    const finished = render(liveView({ phase: 'done', live: false, toolCount: 3 }))
+    const activeChildren = active.props.children as unknown[]
+    const finishedChildren = finished.props.children as Array<{ props: { children: unknown } }>
+
+    expect(activeChildren[2]).toBe(false)
+    expect(finishedChildren).toHaveLength(3)
+    expect(finishedChildren[2]?.props.children).toBe(3)
+  })
+
   it('paints the heuristic line before any summary exists', async () => {
     fetchMock.mockResolvedValue(new Response(null, { status: 204 }))
     const { el, row } = fakeElement()
